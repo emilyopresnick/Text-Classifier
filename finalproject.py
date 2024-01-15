@@ -5,6 +5,8 @@ Created on Tue Dec  1 00:43:31 2020
 @author: opres
 """
 import math
+import os.path
+
 def clean_text(txt):
         '''takes in a string txt and returns a list containing all of the words
         in txt after it has been cleaned of periods commas question marks exclamation marks 
@@ -206,11 +208,20 @@ class TextModel:
     def save_model(self):
         '''saves the TextModel object by writing the dictionaries to 
         files'''
+        filePath = "./Outputs"
         filename_word=self.name + '_words'
         filename_wl=self.name+ '_word_lengths'
         filename_stems=self.name+ '_stems'
         filename_sl=self.name+ '_sentence_lengths'
-        filename_pf=self.name+ '_punctuation_frequency'
+        filename_pf=self.name+ '_punctuation_'
+
+        filename_word = os.path.join(filePath, filename_word+".txt") 
+        filename_wl = os.path.join(filePath, filename_wl+".txt")
+        filename_stems = os.path.join(filePath, filename_stems+".txt") 
+        filename_sl = os.path.join(filePath, filename_sl+".txt") 
+        filename_pf = os.path.join(filePath, filename_pf+".txt") 
+
+
         fw=open(filename_word,'w')
         fwl=open(filename_wl,'w')
         fs=open(filename_stems,'w')
@@ -229,12 +240,12 @@ class TextModel:
         
     def read_model(self):
         '''reads the stored dictionaries for the TextModel
-        object from theit files'''
-        filename_word=self.name + '_words'
-        filename_wl=self.name+ '_word_lengths'
-        filename_stems=self.name+ '_stems'
-        filename_sl=self.name+ '_sentence_lengths'
-        filename_pf=self.name+ '_punctuation_frequency'
+        object from their files'''
+        filename_word= "./Outputs/" + self.name + '_words'
+        filename_wl= "./Outputs/" + self.name+ '_word_lengths'
+        filename_stems= "./Outputs/" + self.name+ '_stems'
+        filename_sl= "./Outputs/" + self.name+ '_sentence_lengths'
+        filename_pf= "./Outputs/" + self.name+ '_punctuation_frequency'
         fw=open(filename_word,'r')
         fwl=open(filename_wl,'r')
         fs=open(filename_stems,'r')
@@ -287,20 +298,7 @@ class TextModel:
             print(self.name+ ' is more likely to have come from '+ source2.name)
         else:
             print(self.name+ ' is from neither '+ source1.name + ' nor '+ source2.name)
-
-
-def test():
-    print("hi")
-    """ tests the classify method """
-    source1 = TextModel('source1')
-    source1.add_string('It is interesting that she is interested.')
-
-    source2 = TextModel('source2')
-    source2.add_string('I am very, very excited about this!')
-
-    mystery = TextModel('mystery')
-    mystery.add_string('Is he interested? No, but I am.')
-    mystery.classify(source1, source2)    
+ 
 
 def run_tests():
     """runs tests for the source models chosen against 4 tests cases """
@@ -328,8 +326,7 @@ def run_tests():
     new4.classify(source1, source2)      
         
     
-                
-        
+run_tests()    
 
     
     
