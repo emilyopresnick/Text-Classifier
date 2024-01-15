@@ -200,7 +200,7 @@ class TextModel:
     
     def add_file(self,filename):
         '''adds all of the text that is in the file, filename, to the model'''
-        file = open(filename, 'r', encoding='utf8', errors='ignore')
+        file = open("./Text/" + filename, 'r', encoding='utf8', errors='ignore')
         text=file.read()
         file.close()
         self.add_string(text)
@@ -208,20 +208,11 @@ class TextModel:
     def save_model(self):
         '''saves the TextModel object by writing the dictionaries to 
         files'''
-        filePath = "./Outputs"
         filename_word=self.name + '_words'
         filename_wl=self.name+ '_word_lengths'
         filename_stems=self.name+ '_stems'
         filename_sl=self.name+ '_sentence_lengths'
         filename_pf=self.name+ '_punctuation_'
-
-        filename_word = os.path.join(filePath, filename_word+".txt") 
-        filename_wl = os.path.join(filePath, filename_wl+".txt")
-        filename_stems = os.path.join(filePath, filename_stems+".txt") 
-        filename_sl = os.path.join(filePath, filename_sl+".txt") 
-        filename_pf = os.path.join(filePath, filename_pf+".txt") 
-
-
         fw=open(filename_word,'w')
         fwl=open(filename_wl,'w')
         fs=open(filename_stems,'w')
@@ -241,11 +232,11 @@ class TextModel:
     def read_model(self):
         '''reads the stored dictionaries for the TextModel
         object from their files'''
-        filename_word= "./Outputs/" + self.name + '_words'
-        filename_wl= "./Outputs/" + self.name+ '_word_lengths'
-        filename_stems= "./Outputs/" + self.name+ '_stems'
-        filename_sl= "./Outputs/" + self.name+ '_sentence_lengths'
-        filename_pf= "./Outputs/" + self.name+ '_punctuation_frequency'
+        filename_word= self.name + '_words'
+        filename_wl= self.name+ '_word_lengths'
+        filename_stems=  self.name+ '_stems'
+        filename_sl= self.name+ '_sentence_lengths'
+        filename_pf= self.name+ '_punctuation_frequency'
         fw=open(filename_word,'r')
         fwl=open(filename_wl,'r')
         fs=open(filename_stems,'r')
